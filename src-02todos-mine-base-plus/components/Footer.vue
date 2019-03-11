@@ -1,26 +1,23 @@
 <template>
   <div class="todo-footer">
     <label>
-      <!--<input type="checkbox" v-model="isAllChecked"/>-->
-      <slot name="left"></slot>
+      <input type="checkbox" v-model="isAllChecked"/>
     </label>
-    <slot name="middle"></slot>
-    <!--<span>
+    <span>
           <span>已完成{{num}}</span> / 全部{{todosList.length}}
-    </span>-->
-    <slot name="right"></slot>
-    <!--<button class="btn btn-danger" @click="deleteDoneTodo">清除已完成任务</button>-->
+        </span>
+    <button class="btn btn-danger" @click="deleteDoneTodo">清除已完成任务</button>
   </div>
 </template>
 <script>
   export default {
     props: {
-      /* deleteDoneTodo: {
+      deleteDoneTodo: {
         type: Function,
         required: true
       },
       todosList: Array,
-      footerSelect: Function */
+      footerSelect: Function
     },
     data () {
       return {

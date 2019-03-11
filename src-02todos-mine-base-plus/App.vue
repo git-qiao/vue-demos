@@ -2,23 +2,15 @@
   <div id="root">
     <div class="todo-container">
       <div class="todo-wrap">
-        <AddTodos @addTodo="addTodo"/> <!--使用自定义事件-->
-        <Lists :todosList="todosList"/>
-        <Footer>
-          <input type="checkbox" v-model="isAllChecked" slot="left"/>
-          <span slot="middle">
-            <span>已完成{{num}}</span> / 全部{{todosList.length}}
-          </span>
-          <button class="btn btn-danger" @click="deleteDoneTodo" slot="right">清除已完成任务</button>
-        </Footer>
-        <!--<Footer :todosList="todosList" :deleteDoneTodo="deleteDoneTodo" :footerSelect="footerSelect"/>-->
+        <AddTodos :addTodo="addTodo"/>
+        <Lists :todosList="todosList" :deleteTodo="deleteTodo"/>
+        <Footer :todosList="todosList" :deleteDoneTodo="deleteDoneTodo" :footerSelect="footerSelect"/>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  import PubSub from 'pubsub-js'
   import {getTodos, setTodos} from './utils/storageUtil'
 
   import AddTodos from './components/AddTodos'
@@ -77,11 +69,6 @@
       // 刚上来进行缓存
       setTodos(this.todosList)
       // localStorage.setItem('todos_key', JSON.stringify(this.todosList))
-
-      // 订阅
-      PubSub.subscribe('DELETE_TODO', (msg, data) => {
-        this.deleteTodo(data) // 注意，vue或者组件控制的回调函数，this指向vm实例或者组件对象，但是这里的this不用箭头函数会指向PubSub
-      })
     },
     watch: {
       todosList: {
@@ -92,33 +79,6 @@
         // 简写
         handler: setTodos,
         deep: true
-      }
-    },
-    computed: {
-      isAllChecked: {
-        get () {
-          // 只有每一项都被选中时，总的才会被选中
-          const {todosList} = this
-          if (todosList.length) {
-            const res = todosList.every(todo => {
-              return todo.isChecked === true
-            })
-            if (res) {
-              return true
-            } else {
-              return false
-            }
-          }
-          return false
-        },
-        set (value) {
-          this.footerSelect(value)
-        }
-      },
-      num () {
-        return this.todosList.reduce((pre, todo) => {
-          return pre + (todo.isChecked === true ? 1 : 0)
-        }, 0)
       }
     }
   }

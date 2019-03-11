@@ -6,7 +6,7 @@
 <script>
   export default {
     props: {
-      // 'addTodo': Function
+      'addTodo': Function
     },
     data () {
       return {
@@ -25,9 +25,7 @@
         }
         // 3.符合上面条件后，才调用父组件传递过来的方法
         const todo = {isChecked: false, content}
-        // this.addTodo(todo)
-        // 对自定义事件进行触发
-        this.$emit('addTodo', todo)
+        this.addTodo(todo)
         // 4.清空输入框
         this.content = ''
       }

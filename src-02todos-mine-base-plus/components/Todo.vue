@@ -4,15 +4,12 @@
       <input type="checkbox" v-model="todo.isChecked"/>
       <span>{{todo.content}}</span>
     </label>
-    <button class="btn btn-danger" style="display:none" v-show="changeFlag" @click="deleteTodo">删除</button>
+    <button class="btn btn-danger" style="display:none" v-show="changeFlag" @click="deleteTodo(index)">删除</button>
   </li>
 </template>
 <script>
-  // 使用订阅发布进行 删除操作
-  import PubSub from 'pubsub-js'
-
   export default {
-    props: ['todo', 'index'],
+    props: ['todo', 'deleteTodo', 'index'],
     data () {
       return {
         bgColor: '#ffffff', // 标记背景色
@@ -28,9 +25,6 @@
           this.bgColor = '#ffffff'
           this.changeFlag = !this.changeFlag
         }
-      },
-      deleteTodo () {
-        PubSub.publish('DELETE_TODO', this.index)
       }
     }
   }
