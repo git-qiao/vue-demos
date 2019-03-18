@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>数字为： {{num}}，类型是： {{type}}</h1>
+    <h1>数字为： {{$store.state.num}}，类型是： {{$store.getters.type}}</h1>
     <select name="num" v-model="$store.state.n">
       <option value="1">1</option>
       <option value="3">3</option>
@@ -14,25 +14,8 @@
 </template>
 
 <script>
-  import {mapState, mapGetters, mapActions} from 'vuex'
-
   export default {
-    /*computed: {
-      num () {
-        return this.$store.state.num
-      },
-      type () {
-        return this.$store.state.type
-      }
-    },*/
-    computed: {
-      ...mapState(['num']), //mapState(['num'] --> {num(){return this.$store.state['num']}}
-      ...mapGetters(['type']) //mapGetters(['type'] --> {type(){return this.$store.state['type']}}
-    },
     methods: {
-      ...mapActions(['increment', 'decrement', 'incrementIfOdd', 'incrementAsync'])
-    },
-    /*methods: {
       increment () {
         this.$store.dispatch('increment')
       },
@@ -45,8 +28,7 @@
       incrementAsync () {
         this.$store.dispatch('incrementAsync')
       }
-    },*/
-
+    },
     mounted () {
       console.log(this.$store)
     }

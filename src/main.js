@@ -1,22 +1,15 @@
 import Vue from 'vue'
-
 import App from './App'
 
-import router from './router'
+import store from './store/store'
+
+// 设置为 false 以阻止 vue 在启动时生成生产提示
+Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  components: {App},
+  components: { App }, /* 注册组件 */
   template: '<App/>',
-  router // 配置路由器
+  store // 挂载store状态  --》 所有组件对象都有一个属性$store
 })
-
-/* eslint-disable no-new */
-/*
-* 路由： key-value的映射
-* 路由器： 一个应用有一个路由器，多个路由
-* 拆路由：
-*   1.路由组件显示区域
-*   2.一级路由/二级路由...
-* */
