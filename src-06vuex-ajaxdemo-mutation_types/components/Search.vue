@@ -2,7 +2,7 @@
   <section class="jumbotron">
     <h3 class="jumbotron-heading">Search Github Users</h3>
     <div>
-      <input type="text" placeholder="enter the name you search" v-model="searchName" @keyup.enter="search"/>
+      <input type="text" placeholder="enter the name you search" v-model="searchName"  @keyup.enter="search"/>
       <button @click="search">Search</button>
     </div>
   </section>
@@ -22,7 +22,6 @@
         if (searchName) {
           // 数据不为空时进行 消息的发布
           // PubSub.publish('SEARCH_NAME', searchName)
-
           this.$store.dispatch('search', searchName)
         }
       }

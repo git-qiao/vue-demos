@@ -1,5 +1,5 @@
 /*
-* vuex核心管理模块store
+* vuex最核心管理对象store
 * */
 import Vue from 'vue'
 import Vuex from 'vuex'
